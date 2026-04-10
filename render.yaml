@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: mental-math-quiz-server
+    env: node
+    region: oregon
+    plan: free
+    rootDir: server
+    buildCommand: npm install --production
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGODB_URI
+        fromDatabase:
+          name: mental-math-quiz-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+
+databases:
+  - name: mental-math-quiz-db
+    databaseName: mentalmathquiz
+    plan: free

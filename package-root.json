@@ -1,0 +1,17 @@
+{
+  "name": "mental-math-quiz",
+  "version": "1.0.0",
+  "description": "Mental Math Quiz - Full Stack MERN Application",
+  "scripts": {
+    "install:all": "npm install && cd server && npm install",
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:client": "vite",
+    "dev:server": "cd server && npm run dev",
+    "build": "tsc -b && vite build",
+    "start": "cd server && npm start",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

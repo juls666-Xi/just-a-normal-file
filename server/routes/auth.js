@@ -21,16 +21,21 @@ router.post(
   ],
   async (req, res) => {
     try {
+      console.log('Registration attempt:', req.body);
+      
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
+        console.log('Validation errors:', errors.array());
         return res.status(400).json({ errors: errors.array() });
       }
 
       const { username, password } = req.body;
+      console.log('Creating user:', username.toLowerCase());
 
       // Check if user exists
       const existingUser = await User.findOne({ username: username.toLowerCase() });
       if (existingUser) {
+        console.log('User already exists:', username.toLowerCase());
         return res.status(400).json({ message: 'Username already exists' });
       }
 
@@ -41,6 +46,7 @@ router.post(
       });
 
       await user.save();
+      console.log('User saved successfully:', user._id);
 
       // Generate token
       const token = generateToken(user._id, user.username);
@@ -54,7 +60,7 @@ router.post(
         }
       });
     } catch (error) {
-      console.error('Registration error:', error);
+      console.error('Registration error:', error.message, error.stack);
       res.status(500).json({ message: 'Server error during registration' });
     }
   }

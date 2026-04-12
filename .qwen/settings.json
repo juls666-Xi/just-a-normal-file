@@ -7,7 +7,9 @@
       "Bash(git push)",
       "Bash(curl *)",
       "Bash(git rm *)",
-      "Bash(tr *)"
+      "Bash(tr *)",
+      "Bash(npm run *)",
+      "Bash(npm install)"
     ]
   },
   "$version": 3
